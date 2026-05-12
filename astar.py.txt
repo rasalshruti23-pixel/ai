@@ -1,0 +1,43 @@
+import heapq
+
+print("A* Algorithm")
+
+def heuristic(a, b):
+    return abs(a[0]-b[0]) + abs(a[1]-b[1])
+
+def astar(grid, start, goal):
+    queue = []
+    heapq.heappush(queue, (0, start, []))
+    visited = set()
+
+    while queue:
+        cost, current, path = heapq.heappop(queue)
+
+        if current in visited:
+            continue
+
+        visited.add(current)
+        path = path + [current]
+
+        if current == goal:
+            return path
+
+        x, y = current
+        neighbors = [(x+1,y),(x-1,y),(x,y+1),(x,y-1)]
+
+        for nx, ny in neighbors:
+            if 0 <= nx < len(grid) and 0 <= ny < len(grid[0]):
+                if grid[nx][ny] == 0 and (nx, ny) not in visited:
+                    priority = len(path) + heuristic((nx, ny), goal)
+                    heapq.heappush(queue, (priority, (nx, ny), path))
+    return None
+
+grid = [
+    [0,0,0,0,1],
+    [0,1,0,0,0],
+    [0,1,0,1,0],
+    [0,0,0,1,0],
+    [1,0,0,0,0]
+]
+
+print("Path:", astar(grid, (0,0), (4,4)))

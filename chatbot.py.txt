@@ -1,0 +1,22 @@
+print("Chatbot Program")
+
+def chatbot():
+    print("Customer Support Bot: Hello! How can I help you?")
+    print("Type 'exit' to end the chat.")
+
+    while True:
+        user = input("You: ").lower()
+
+        if user == "exit":
+            print("Bot: Thank you for visiting!")
+            break
+        elif "hi" in user or "hello" in user:
+            print("Bot: Hello! How can I assist you?")
+        elif "delivery" in user:
+            print("Bot: Delivery takes 3-5 days")
+        elif "return" in user:
+            print("Bot: Return allowed within 7 days")
+        else:
+            print("Bot: Sorry, I don't understand")
+
+chatbot()
